@@ -6,7 +6,9 @@ import 'package:gap/gap.dart';
 import 'package:quote/core/utils/app_assets.dart';
 import 'package:quote/core/utils/appcolors.dart';
 import 'package:quote/core/utils/textstyle.dart';
+import 'package:quote/core/widgets/custom_button.dart';
 import 'package:quote/feature/onboarding/model/onboradingModel.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboradingPage extends StatefulWidget {
   const OnboradingPage({super.key});
@@ -16,6 +18,7 @@ class OnboradingPage extends StatefulWidget {
 }
 
 class _OnboradingPageState extends State<OnboradingPage> {
+  PageController _pageController = new PageController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,40 +44,74 @@ class _OnboradingPageState extends State<OnboradingPage> {
         child: Column(
           children: [
             Expanded(
-                child: PageView.builder(
-              itemCount: onboradingPages.length,
-              itemBuilder: (context, index) {
-                return Column(
-                  children: [
-                    SvgPicture.asset(
-                      height: 300,
-                      onboradingPages[index].image ?? '',
-                    ),
-                    Gap(20),
-                    Center(
-                      child: Text(
-                        onboradingPages[index].title ?? '',
-                        style: getTitleStyle(
-                          color: AppColors.secondary,
-                          fontSize: 30,
-                        ),
-                        textAlign: TextAlign.center,
+              child: PageView.builder(
+                itemCount: onboradingPages.length,
+                itemBuilder: (context, index) {
+                  return Column(
+                    children: [
+                      Spacer(
+                        flex: 1,
                       ),
-                    ),
-                    Gap(20),
-                    Center(
-                      child: Text(
-                        onboradingPages[index].description ?? '',
-                        style: getBodyStyle(
-                          color: AppColors.primary,
-                        ),
-                        textAlign: TextAlign.center,
+                      SvgPicture.asset(
+                        height: 300,
+                        onboradingPages[index].image ?? '',
                       ),
+                      Gap(20),
+                      Center(
+                        child: Text(
+                          onboradingPages[index].title ?? '',
+                          style: getTitleStyle(
+                            color: AppColors.secondary,
+                            fontSize: 30,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Gap(20),
+                      Center(
+                        child: Text(
+                          onboradingPages[index].description ?? '',
+                          style: getBodyStyle(
+                            color: AppColors.primary,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Spacer(
+                        flex: 5,
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ),
+            SizedBox(
+              height: 50,
+              width: double.infinity,
+              child: Row(
+                children: [
+                  SmoothPageIndicator(
+                    effect: ExpandingDotsEffect(
+                      activeDotColor: AppColors.secondary,
+                      dotColor: AppColors.primary,
+                      dotWidth: 10,
+                      spacing: 5,
+                      dotHeight: 10,
                     ),
-                  ],
-                );
-              },
-            ))
+                    count: onboradingPages.length,
+                    controller: _pageController,
+                  ),
+                  Spacer(),
+                  CustomButton(
+                    width: 100,
+                    height: 40,
+                    fontsize: 16,
+                    text: "هيا بنا",
+                    onPressed: () {},
+                  )
+                ],
+              ),
+            ),
           ],
         ),
       ),

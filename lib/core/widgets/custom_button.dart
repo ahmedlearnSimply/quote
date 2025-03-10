@@ -35,7 +35,7 @@ class CustomButton extends StatelessWidget {
           child: Text(
             text,
             style:
-                getTitleStyle(color: AppColors.white, fontSize: fontsize ?? 16),
+                getBodyStyle(color: AppColors.white, fontSize: fontsize ?? 16),
           )),
     );
   }
