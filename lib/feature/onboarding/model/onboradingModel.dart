@@ -29,6 +29,6 @@ List<Onboradingmodel> onboradingPages = [
   Onboradingmodel(
     title: "جاهز لاكتشاف الكلمات الملهمة؟",
     description: "ابدأ رحلتك في عالم الحكم والاقتباسات واستمتع بجمال الكلمات.",
-    image: AppAssets.on2Svg,
+    image: AppAssets.on3Svg,
   ),
 ];
