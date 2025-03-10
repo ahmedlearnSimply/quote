@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:quote/core/utils/appcolors.dart';
 import 'package:quote/core/utils/textstyle.dart';
 import 'dart:ui';
