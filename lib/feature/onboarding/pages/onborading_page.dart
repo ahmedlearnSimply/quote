@@ -18,25 +18,27 @@ class OnboradingPage extends StatefulWidget {
 }
 
 class _OnboradingPageState extends State<OnboradingPage> {
-  PageController _pageController = new PageController();
+  final PageController _pageController = new PageController();
+  int pageIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(left: 15),
-            child: GestureDetector(
-              onTap: () {},
-              child: Text(
-                "تخطي",
-                style: getBodyStyle(
-                  color: AppColors.primary,
+          if (pageIndex != 2)
+            Padding(
+              padding: const EdgeInsets.only(left: 15),
+              child: GestureDetector(
+                onTap: () {},
+                child: Text(
+                  "تخطي",
+                  style: getBodyStyle(
+                    color: AppColors.primary,
+                  ),
                 ),
               ),
-            ),
-          )
+            )
         ],
       ),
       body: Padding(
@@ -45,7 +47,13 @@ class _OnboradingPageState extends State<OnboradingPage> {
           children: [
             Expanded(
               child: PageView.builder(
+                controller: _pageController,
                 itemCount: onboradingPages.length,
+                onPageChanged: (value) {
+                  setState(() {
+                    pageIndex = value;
+                  });
+                },
                 itemBuilder: (context, index) {
                   return Column(
                     children: [
@@ -102,13 +110,14 @@ class _OnboradingPageState extends State<OnboradingPage> {
                     controller: _pageController,
                   ),
                   Spacer(),
-                  CustomButton(
-                    width: 100,
-                    height: 40,
-                    fontsize: 16,
-                    text: "هيا بنا",
-                    onPressed: () {},
-                  )
+                  if (pageIndex == 2)
+                    CustomButton(
+                      width: 100,
+                      height: 40,
+                      fontsize: 16,
+                      text: "هيا بنا",
+                      onPressed: () {},
+                    ),
                 ],
               ),
             ),
