@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import 'package:quote/core/services/storage/local_storage.dart';
 import 'package:quote/core/utils/app_assets.dart';
 import 'package:quote/core/utils/appcolors.dart';
 import 'package:quote/core/utils/textstyle.dart';
@@ -30,7 +31,10 @@ class _OnboradingPageState extends State<OnboradingPage> {
             Padding(
               padding: const EdgeInsets.only(left: 15),
               child: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  AppLocalStorage.cacheData(
+                      key: AppLocalStorage.kOnboarding, value: true);
+                },
                 child: Text(
                   "تخطي",
                   style: getBodyStyle(
@@ -116,7 +120,10 @@ class _OnboradingPageState extends State<OnboradingPage> {
                       height: 40,
                       fontsize: 16,
                       text: "هيا بنا",
-                      onPressed: () {},
+                      onPressed: () {
+                        AppLocalStorage.cacheData(
+                            key: AppLocalStorage.kOnboarding, value: true);
+                      },
                     ),
                 ],
               ),

@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AppLocalStorage {
   //*variables
-  static const String kUserType = "userType";
   static const String kOnboarding = "onboarding";
 
   //* shared preferences
