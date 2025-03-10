@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:quote/core/utils/app_theme.dart';
 import 'package:quote/feature/onboarding/pages/onborading_page.dart';
+import 'package:quote/feature/splash/splash.dart';
 
 void main() {
   runApp(const MainApp());
@@ -25,7 +26,7 @@ class MainApp extends StatelessWidget {
       supportedLocales: [Locale('ar')],
       locale: Locale('ar'),
       home: Scaffold(
-        body: OnboradingPage(),
+        body: Splash(),
       ),
     );
   }
