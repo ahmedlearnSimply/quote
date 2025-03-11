@@ -44,7 +44,7 @@ class _SplashState extends State<Splash> {
             ),
           ),
           Positioned(
-            bottom: 200,
+            bottom: 80,
             right: 25,
             left: 20,
             child: Column(
@@ -70,9 +70,11 @@ class _SplashState extends State<Splash> {
                     ],
                   ),
                 ),
+                Gap(20),
+                TextFormField()
               ],
             ),
-          )
+          ),
         ],
       ),
     );
