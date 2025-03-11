@@ -21,7 +21,7 @@ class _SplashState extends State<Splash> {
       body: Stack(
         children: [
           Positioned(
-            top: 240,
+            top: 100,
             right: 25,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -71,7 +71,32 @@ class _SplashState extends State<Splash> {
                   ),
                 ),
                 Gap(20),
-                TextFormField()
+                TextFormField(
+                  decoration: InputDecoration(
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                    fillColor: AppColors.white,
+                    filled: true,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                      borderSide: BorderSide.none,
+                    ),
+                    hintText: "احمد",
+                    hintTextDirection: TextDirection.rtl,
+                    hintStyle: getSmallStyle(
+                      color: Colors.grey,
+                      fontSize: 20,
+                    ),
+                    prefixIcon: Padding(
+                      padding: const EdgeInsets.only(right: 10.0),
+                      child: Icon(
+                        Icons.person,
+                        color: AppColors.secondary,
+                        size: 30,
+                      ),
+                    ),
+                  ),
+                )
               ],
             ),
           ),
