@@ -9,6 +9,7 @@ import 'package:quote/core/utils/app_assets.dart';
 import 'package:quote/core/utils/appcolors.dart';
 import 'package:quote/core/utils/textstyle.dart';
 import 'package:quote/core/widgets/custom_button.dart';
+import 'package:quote/feature/intro/Welcome.dart';
 import 'package:quote/feature/onboarding/model/onboradingModel.dart';
 import 'package:quote/feature/splash/splash.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -36,7 +37,7 @@ class _OnboradingPageState extends State<OnboradingPage> {
                 onTap: () {
                   AppLocalStorage.cacheData(
                       key: AppLocalStorage.kOnboarding, value: true);
-                  pushAndRemoveUntil(context, Splash());
+                  pushAndRemoveUntil(context, WelcomePage());
                 },
                 child: Text(
                   "تخطي",
@@ -126,7 +127,7 @@ class _OnboradingPageState extends State<OnboradingPage> {
                       onPressed: () {
                         AppLocalStorage.cacheData(
                             key: AppLocalStorage.kOnboarding, value: true);
-                        pushAndRemoveUntil(context, Splash());
+                        pushAndRemoveUntil(context, WelcomePage());
                       },
                     ),
                 ],

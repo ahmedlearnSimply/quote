@@ -9,6 +9,7 @@ import 'package:quote/core/utils/appcolors.dart';
 import 'package:quote/core/utils/textstyle.dart';
 import 'package:quote/core/widgets/custom_button.dart';
 import 'package:quote/feature/home/presentation/home.dart';
+import 'package:quote/feature/intro/Welcome.dart';
 import 'package:quote/feature/onboarding/pages/onborading_page.dart';
 
 class Splash extends StatefulWidget {
@@ -33,7 +34,7 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
       if (isOnboardingShown && hasEnteredName) {
         pushReplacement(context, Home());
       } else if (isOnboardingShown) {
-        pushReplacement(context, Splash());
+        pushReplacement(context, WelcomePage());
       } else {
         pushReplacement(context, OnboradingPage());
       }
