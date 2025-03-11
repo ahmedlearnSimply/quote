@@ -14,17 +14,22 @@ class Splash extends StatefulWidget {
 }
 
 class _SplashState extends State<Splash> {
+  TextEditingController name = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.black,
-      body: Stack(
-        children: [
-          Positioned(
-            top: 100,
-            right: 25,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 25),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment
+              .spaceBetween, // 🔹 Aligns top and bottom sections
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 100), // 🔹 Replaces `Positioned` for spacing
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   "كلمة واحدة قد تغيّر يومك",
@@ -42,13 +47,8 @@ class _SplashState extends State<Splash> {
                 ),
               ],
             ),
-          ),
-          Positioned(
-            bottom: 80,
-            right: 25,
-            left: 20,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text.rich(
                   TextSpan(
@@ -72,6 +72,15 @@ class _SplashState extends State<Splash> {
                 ),
                 Gap(20),
                 TextFormField(
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "من فضلك ادخل اسمك";
+                    } else {
+                      return null;
+                    }
+                  },
+                  controller: name,
+                  keyboardType: TextInputType.name,
                   decoration: InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(horizontal: 20, vertical: 16),
@@ -96,11 +105,14 @@ class _SplashState extends State<Splash> {
                       ),
                     ),
                   ),
-                )
+                ),
+                SizedBox(
+                    height:
+                        80), // 🔹 Matches the previous `Positioned` bottom spacing
               ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
