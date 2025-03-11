@@ -4,6 +4,8 @@ class AppAssets {
   static String on3Svg = "assets/images/on3.svg";
   static String backgroundPng = "assets/images/bk.jpg";
   static String background2Png = "assets/images/bk2.jpg";
+  static String brain = "assets/images/brain.png";
+
   // static String welcomePng = "assets/images/welcome-bg.png";
   // static String docPng = "assets/images/doc.png";
   // static String doctorCardSvg = "assets/images/doctor-card.svg";

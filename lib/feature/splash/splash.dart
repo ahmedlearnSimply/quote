@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:quote/core/utils/app_assets.dart';
 import 'package:quote/core/utils/appcolors.dart';
 import 'package:quote/core/utils/textstyle.dart';
+import 'package:quote/core/widgets/custom_button.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -13,105 +14,174 @@ class Splash extends StatefulWidget {
   State<Splash> createState() => _SplashState();
 }
 
-class _SplashState extends State<Splash> {
+class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
   TextEditingController name = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.black,
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 25),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment
-              .spaceBetween, // 🔹 Aligns top and bottom sections
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 100), // 🔹 Replaces `Positioned` for spacing
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+      body: Container(
+        height: double.infinity,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [AppColors.primary, AppColors.black],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(25),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  "كلمة واحدة قد تغيّر يومك",
-                  style: getTitleStyle(
-                    fontSize: 30,
-                    color: Colors.white,
-                  ),
-                ),
-                Text(
-                  "او حياتك",
-                  style: getTitleStyle(
-                    fontSize: 50,
-                    color: AppColors.secondary,
-                  ),
-                ),
-              ],
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text.rich(
-                  TextSpan(
-                    children: [
-                      TextSpan(
-                        text: "ما هو اسمك؟",
-                        style: getTitleStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                        ),
+                SizedBox(height: 80),
+                Column(
+                  children: [
+                    Text(
+                      "كلمة واحدة قد تغيّر يومك",
+                      style: getTitleStyle(
+                        fontSize: 28,
+                        color: Colors.white,
+                      ).copyWith(
+                        fontWeight: FontWeight.bold,
+                        shadows: [
+                          Shadow(
+                            blurRadius: 10.0,
+                            color: Colors.black.withOpacity(0.5),
+                            offset: Offset(2, 2),
+                          ),
+                        ],
                       ),
-                      TextSpan(
-                        text: "   لنُخصص الاقتباسات لك",
-                        style: getTitleStyle(
-                          fontSize: 16,
-                          color: AppColors.secondary,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Gap(20),
-                TextFormField(
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return "من فضلك ادخل اسمك";
-                    } else {
-                      return null;
-                    }
-                  },
-                  controller: name,
-                  keyboardType: TextInputType.name,
-                  decoration: InputDecoration(
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                    fillColor: AppColors.white,
-                    filled: true,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20.0),
-                      borderSide: BorderSide.none,
+                      textAlign: TextAlign.center,
                     ),
-                    hintText: "احمد",
-                    hintTextDirection: TextDirection.rtl,
-                    hintStyle: getSmallStyle(
-                      color: Colors.grey,
-                      fontSize: 20,
-                    ),
-                    prefixIcon: Padding(
-                      padding: const EdgeInsets.only(right: 10.0),
-                      child: Icon(
-                        Icons.person,
+                    Gap(10),
+                    Text(
+                      "او حياتك",
+                      style: getTitleStyle(
+                        fontSize: 50,
                         color: AppColors.secondary,
-                        size: 30,
+                      ).copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    Gap(20),
+                    Container(
+                      decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 30,
+                            color: Colors.black.withOpacity(0.3),
+                            spreadRadius: 5,
+                          ),
+                        ],
+                      ),
+                      child: Image.asset(
+                        width: 200,
+                        AppAssets.brain,
                       ),
                     ),
-                  ),
+                  ],
                 ),
-                SizedBox(
-                    height:
-                        80), // 🔹 Matches the previous `Positioned` bottom spacing
+                Gap(60),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                            text: "ما هو اسمك؟",
+                            style: getTitleStyle(
+                              fontSize: 22,
+                              color: Colors.white,
+                            ).copyWith(fontWeight: FontWeight.bold),
+                          ),
+                          TextSpan(
+                            text: "   لنُخصص الاقتباسات لك",
+                            style: getTitleStyle(
+                              fontSize: 18,
+                              color: AppColors.secondary,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Gap(20),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 15,
+                            color: Colors.black.withOpacity(0.3),
+                            offset: Offset(3, 3),
+                          ),
+                        ],
+                      ),
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "من فضلك ادخل اسمك";
+                          }
+                          return null;
+                        },
+                        controller: name,
+                        keyboardType: TextInputType.name,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 16),
+                          fillColor: Colors.white,
+                          filled: true,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                            borderSide: BorderSide.none,
+                          ),
+                          hintText: "احمد",
+                          hintTextDirection: TextDirection.rtl,
+                          hintStyle: getSmallStyle(
+                            color: Colors.grey,
+                            fontSize: 20,
+                          ),
+                          prefixIcon: Padding(
+                            padding: const EdgeInsets.only(right: 10.0),
+                            child: Icon(
+                              Icons.person,
+                              color: AppColors.secondary,
+                              size: 30,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Gap(20),
+                    Center(
+                      child: AnimatedContainer(
+                        duration: Duration(milliseconds: 400),
+                        child: CustomButton(
+                          color: AppColors.secondary,
+                          width: 160,
+                          height: 50,
+                          text: "هيا بنا",
+                          textColor: Colors.white,
+                          fontsize: 22,
+                          onPressed: () {},
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ],
             ),
-          ],
+          ),
         ),
       ),
     );
