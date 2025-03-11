@@ -3,12 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import 'package:quote/core/functions/naviagation.dart';
 import 'package:quote/core/services/storage/local_storage.dart';
 import 'package:quote/core/utils/app_assets.dart';
 import 'package:quote/core/utils/appcolors.dart';
 import 'package:quote/core/utils/textstyle.dart';
 import 'package:quote/core/widgets/custom_button.dart';
 import 'package:quote/feature/onboarding/model/onboradingModel.dart';
+import 'package:quote/feature/splash/splash.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboradingPage extends StatefulWidget {
@@ -34,6 +36,7 @@ class _OnboradingPageState extends State<OnboradingPage> {
                 onTap: () {
                   AppLocalStorage.cacheData(
                       key: AppLocalStorage.kOnboarding, value: true);
+                  pushAndRemoveUntil(context, Splash());
                 },
                 child: Text(
                   "تخطي",
@@ -123,6 +126,7 @@ class _OnboradingPageState extends State<OnboradingPage> {
                       onPressed: () {
                         AppLocalStorage.cacheData(
                             key: AppLocalStorage.kOnboarding, value: true);
+                        pushAndRemoveUntil(context, Splash());
                       },
                     ),
                 ],
