@@ -9,24 +9,10 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List<String> categories = [
-    "beauty",
-    "coffee",
-    "friendship",
-    "habits",
-    "happiness",
-    "life",
-    "loneliness",
-    "love",
-    "marriage",
-    "night",
-    "risk",
-    "sadness",
-    "sport",
-    "success",
-    "travel"
+    'total',
   ];
 
-  String selectedCategory = "coffee"; // Default category
+  String selectedCategory = "total"; // Default category
   List<Quote> quotes = [];
   Quote? currentQuote;
 
