@@ -15,6 +15,7 @@ class _HomeState extends State<Home> {
   String selectedCategory = "total"; // Default category
   List<Quote> quotes = [];
   final PageController _pageController = PageController();
+  final Random _random = Random();
 
   @override
   void initState() {
@@ -32,7 +33,15 @@ class _HomeState extends State<Home> {
     List<Quote> loadedQuotes = await loadQuotesFromCategory(category);
     setState(() {
       quotes = loadedQuotes;
+      quotes.shuffle();
     });
+  }
+
+  Quote getRandomQuote() {
+    if (quotes.isEmpty) {
+      return Quote(text: "لا توجد اقتباسات متاحة", author: "غير معروف");
+    }
+    return quotes[_random.nextInt(quotes.length)];
   }
 
   @override
@@ -47,7 +56,7 @@ class _HomeState extends State<Home> {
           controller: _pageController,
           itemCount: quotes.length,
           itemBuilder: (context, index) {
-            final quote = quotes[index];
+            final quote = getRandomQuote();
             return Container(
               decoration: BoxDecoration(color: AppColors.black),
               alignment: Alignment.center,
