@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:quote/core/utils/app_assets.dart';
@@ -19,6 +21,7 @@ class _HomeState extends State<Home> {
   List<String> categories = ["total"];
   String selectedCategory = "total";
   List<Quote> quotes = [];
+  Random _random = new Random();
   final PageController _pageController = PageController();
   int currentIndex = 0; // Track the current quote index
 
@@ -38,7 +41,7 @@ class _HomeState extends State<Home> {
     List<Quote> loadedQuotes = await loadQuotesFromCategory(category);
     setState(() {
       quotes = loadedQuotes;
-      currentIndex = 0; // Always start from the first quote
+      currentIndex = _random.nextInt(quotes.length);
     });
   }
 
