@@ -2,6 +2,7 @@
 
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:quote/core/utils/app_assets.dart';
 import 'package:quote/core/utils/appcolors.dart';
 import 'package:quote/core/utils/textstyle.dart';
@@ -98,6 +99,17 @@ class _HomeState extends State<Home> {
                               height: 50,
                               child: Image.asset(
                                 AppAssets.heart,
+                              ),
+                            ),
+                          ),
+                          Gap(40),
+                          GestureDetector(
+                            onTap: () {},
+                            child: SizedBox(
+                              width: 50,
+                              height: 50,
+                              child: Image.asset(
+                                AppAssets.upload,
                               ),
                             ),
                           ),

@@ -7,6 +7,7 @@ class AppAssets {
   static String brain = "assets/images/brain.png";
   static String heart = "assets/images/heart.png";
   static String share = "assets/images/share.png";
+  static String upload = "assets/images/upload.png";
 
   // static String welcomePng = "assets/images/welcome-bg.png";
   // static String docPng = "assets/images/doc.png";
