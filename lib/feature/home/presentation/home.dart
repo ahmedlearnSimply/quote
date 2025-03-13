@@ -10,9 +10,10 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  //* variables
   List<String> categories = ["total"];
 
-  String selectedCategory = "total"; // Default category
+  String selectedCategory = "total";
   List<Quote> quotes = [];
   final PageController _pageController = PageController();
   final Random _random = Random();
