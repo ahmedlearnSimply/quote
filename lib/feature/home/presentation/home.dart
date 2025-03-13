@@ -4,9 +4,12 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:quote/core/functions/naviagation.dart';
+import 'package:quote/core/services/storage/local_storage.dart';
 import 'package:quote/core/utils/app_assets.dart';
 import 'package:quote/core/utils/appcolors.dart';
 import 'package:quote/core/utils/textstyle.dart';
+import 'package:quote/feature/fav/presentation/favPage.dart';
 import 'package:quote/feature/home/model/quote.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -58,6 +61,9 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(onPressed: () {
+        push(context, Favpage());
+      }),
       backgroundColor: AppColors.black,
       body: SizedBox(
         height: double.infinity,
@@ -107,8 +113,9 @@ class _HomeState extends State<Home> {
                         children: [
                           IconButton(
                             onPressed: () {
-                              toggleLike(
-                                  quote.text); // Like/Unlike only this quote
+                              toggleLike(quote.text);
+
+                              AppLocalStorage.addToFav(quote);
                             },
                             icon: SizedBox(
                               width: 50,

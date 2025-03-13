@@ -6,6 +6,7 @@ class AppLocalStorage {
   //*variables
   static const String kOnboarding = "onboarding";
   static const String name = "name";
+  static const String _favQuotesKey = 'fav_quotes';
 
   //* shared preferences
   static late SharedPreferences _sharedPreferences;
@@ -37,22 +38,31 @@ class AppLocalStorage {
   static const String _key = 'saved_quotes';
 
   // Save list of quotes to SharedPreferences
-  static Future<void> saveQuotes(List<Quote> quotes) async {
-    final prefs = await SharedPreferences.getInstance();
+  static Future<void> saveQuotes(List<Quote> quotes, String key) async {
     List<String> quoteStrings =
         quotes.map((q) => jsonEncode(q.toJson())).toList();
-    await prefs.setStringList(_key, quoteStrings);
+    await _sharedPreferences.setStringList(_key, quoteStrings);
   }
 
   // Load list of quotes from SharedPreferences
-  static Future<List<Quote>> loadQuotes() async {
-    final prefs = await SharedPreferences.getInstance();
-    List<String>? quoteStrings = prefs.getStringList(_key);
+  static List<Quote> loadQuotes(String key) {
+    List<String>? quoteStrings = _sharedPreferences.getStringList(key);
 
     if (quoteStrings != null) {
       return quoteStrings.map((q) => Quote.fromJson(jsonDecode(q))).toList();
     } else {
       return []; // Return empty list if no data found
     }
+  }
+
+  static List<Quote> loadFavQuotes() {
+    return loadQuotes(_favQuotesKey);
+  }
+
+  //* add to favorites  Quotes
+  static Future<void> addToFav(Quote quote) async {
+    List<Quote> favorites = await loadQuotes(_favQuotesKey);
+    favorites.add(quote);
+    await saveQuotes(favorites, _favQuotesKey);
   }
 }

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:quote/core/functions/naviagation.dart';
 import 'package:quote/core/services/storage/local_storage.dart';
 import 'package:quote/core/utils/appcolors.dart';
 import 'package:quote/core/utils/textstyle.dart';
@@ -15,54 +16,50 @@ class Favpage extends StatefulWidget {
 
 class _FavpageState extends State<Favpage> {
   @override
+  List<Quote> favQuotes = [];
+
+  @override
+  void initState() {
+    super.initState();
+    favQuotes = AppLocalStorage.loadFavQuotes();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: Icon(Icons.favorite),
+            onPressed: () {
+              push(context, Favpage());
+            },
+          )
+        ],
+        backgroundColor: AppColors.secondary,
         title: Text(
           "مرحبا بك ${AppLocalStorage.getCachedData(
             key: AppLocalStorage.name,
           )}",
           style: getTitleStyle(
-            color: Colors.white,
+            color: AppColors.primary,
             fontSize: 28,
           ),
         ),
       ),
       body: Center(
-        child: ListView.builder(itemBuilder: (context, index) {
-          return Center(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                height: 150,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: AppColors.greyColor,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Column(
-                    // mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Text(
-                            "Hello world!",
-                            style: getBodyStyle(
-                              fontSize: 24,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
+        child: ListView.builder(
+          itemCount: favQuotes.length,
+          itemBuilder: (context, index) {
+            Quote quote = favQuotes[index];
+            return Container(
+              width: 100,
+              decoration: BoxDecoration(color: Colors.black),
+              child: Text(
+                quote.text,
               ),
-            ),
-          );
-        }),
+            );
+          },
+        ),
       ),
     );
   }
