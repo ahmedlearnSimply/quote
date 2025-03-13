@@ -17,6 +17,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   //* variables
+  bool isLiked = false;
   List<String> categories = ["total"];
 
   String selectedCategory = "total";
@@ -93,22 +94,30 @@ class _HomeState extends State<Home> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          GestureDetector(
-                            onTap: () {},
-                            child: SizedBox(
+                          IconButton(
+                            onPressed: () {
+                              setState(() {
+                                isLiked = !isLiked;
+                              });
+                            },
+                            icon: SizedBox(
                               width: 50,
                               height: 50,
-                              child: Image.asset(
-                                AppAssets.heart,
-                              ),
+                              child: isLiked
+                                  ? Image.asset(
+                                      AppAssets.heart,
+                                    )
+                                  : Image.asset(
+                                      AppAssets.like,
+                                    ),
                             ),
                           ),
                           Gap(40),
-                          GestureDetector(
-                            onTap: () {
+                          IconButton(
+                            onPressed: () {
                               Share.share(quote.text);
                             },
-                            child: SizedBox(
+                            icon: SizedBox(
                               width: 50,
                               height: 50,
                               child: Image.asset(
