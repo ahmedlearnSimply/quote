@@ -1,13 +1,11 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables
 
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:quote/core/utils/app_assets.dart';
 import 'package:quote/core/utils/appcolors.dart';
 import 'package:quote/core/utils/textstyle.dart';
 import 'package:quote/feature/home/model/quote.dart';
-import 'package:quote/main.dart';
 import 'package:share_plus/share_plus.dart';
 
 class Home extends StatefulWidget {
@@ -17,13 +15,12 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   //* variables
-  bool isLiked = false;
+  Set<String> likedQuotes = {}; // Store liked quotes separately
   List<String> categories = ["total"];
-
   String selectedCategory = "total";
   List<Quote> quotes = [];
   final PageController _pageController = PageController();
-  final Random _random = Random();
+  int currentIndex = 0; // Track the current quote index
 
   @override
   void initState() {
@@ -41,15 +38,18 @@ class _HomeState extends State<Home> {
     List<Quote> loadedQuotes = await loadQuotesFromCategory(category);
     setState(() {
       quotes = loadedQuotes;
-      quotes.shuffle();
+      currentIndex = 0; // Always start from the first quote
     });
   }
 
-  Quote getRandomQuote() {
-    if (quotes.isEmpty) {
-      return Quote(text: "لا توجد اقتباسات متاحة", author: "غير معروف");
-    }
-    return quotes[_random.nextInt(quotes.length)];
+  void toggleLike(String quoteText) {
+    setState(() {
+      if (likedQuotes.contains(quoteText)) {
+        likedQuotes.remove(quoteText);
+      } else {
+        likedQuotes.add(quoteText);
+      }
+    });
   }
 
   @override
@@ -63,8 +63,16 @@ class _HomeState extends State<Home> {
           scrollDirection: Axis.vertical,
           controller: _pageController,
           itemCount: quotes.length,
+          onPageChanged: (index) {
+            setState(() {
+              currentIndex = index; // Update current index when scrolling
+            });
+          },
           itemBuilder: (context, index) {
-            final quote = getRandomQuote();
+            final quote =
+                quotes[index]; // Show the correct quote based on index
+            bool isLiked = likedQuotes.contains(quote.text); // Check if liked
+
             return Container(
               decoration: BoxDecoration(color: AppColors.black),
               alignment: Alignment.center,
@@ -96,20 +104,15 @@ class _HomeState extends State<Home> {
                         children: [
                           IconButton(
                             onPressed: () {
-                              setState(() {
-                                isLiked = !isLiked;
-                              });
+                              toggleLike(
+                                  quote.text); // Like/Unlike only this quote
                             },
                             icon: SizedBox(
                               width: 50,
                               height: 50,
                               child: isLiked
-                                  ? Image.asset(
-                                      AppAssets.heart,
-                                    )
-                                  : Image.asset(
-                                      AppAssets.like,
-                                    ),
+                                  ? Image.asset(AppAssets.heart)
+                                  : Image.asset(AppAssets.like),
                             ),
                           ),
                           Gap(40),
@@ -120,9 +123,7 @@ class _HomeState extends State<Home> {
                             icon: SizedBox(
                               width: 50,
                               height: 50,
-                              child: Image.asset(
-                                AppAssets.upload,
-                              ),
+                              child: Image.asset(AppAssets.upload),
                             ),
                           ),
                         ],
