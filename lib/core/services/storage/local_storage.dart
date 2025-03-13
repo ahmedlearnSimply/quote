@@ -7,6 +7,7 @@ class AppLocalStorage {
   static const String kOnboarding = "onboarding";
   static const String name = "name";
   static const String _favQuotesKey = 'fav_quotes';
+  static const String _key = 'saved_quotes';
 
   //* shared preferences
   static late SharedPreferences _sharedPreferences;
@@ -35,19 +36,16 @@ class AppLocalStorage {
     return _sharedPreferences.get(key);
   }
 
-  static const String _key = 'saved_quotes';
-
-  // Save list of quotes to SharedPreferences
+  /// Save a list of quotes to SharedPreferences
   static Future<void> saveQuotes(List<Quote> quotes, String key) async {
     List<String> quoteStrings =
         quotes.map((q) => jsonEncode(q.toJson())).toList();
-    await _sharedPreferences.setStringList(_key, quoteStrings);
+    await _sharedPreferences.setStringList(key, quoteStrings);
   }
 
-  // Load list of quotes from SharedPreferences
+  /// Load a list of quotes from SharedPreferences
   static List<Quote> loadQuotes(String key) {
     List<String>? quoteStrings = _sharedPreferences.getStringList(key);
-
     if (quoteStrings != null) {
       return quoteStrings.map((q) => Quote.fromJson(jsonDecode(q))).toList();
     } else {
@@ -55,14 +53,19 @@ class AppLocalStorage {
     }
   }
 
+  /// Load favorite quotes
   static List<Quote> loadFavQuotes() {
     return loadQuotes(_favQuotesKey);
   }
 
-  //* add to favorites  Quotes
+  /// Add to favorites (prevents duplicates)
   static Future<void> addToFav(Quote quote) async {
-    List<Quote> favorites = await loadQuotes(_favQuotesKey);
-    favorites.add(quote);
-    await saveQuotes(favorites, _favQuotesKey);
+    List<Quote> favorites = loadFavQuotes();
+
+    // Prevent duplicate quotes
+    if (!favorites.any((q) => q.text == quote.text)) {
+      favorites.add(quote);
+      await saveQuotes(favorites, _favQuotesKey);
+    }
   }
 }

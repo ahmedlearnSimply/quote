@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables
-
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -19,19 +17,20 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  //* variables
-  Set<String> likedQuotes = {}; // Store liked quotes separately
+  //* Variables
+  Set<String> likedQuotes = {};
   List<String> categories = ["total"];
   String selectedCategory = "total";
   List<Quote> quotes = [];
-  Random _random = new Random();
+  Random _random = Random();
   final PageController _pageController = PageController();
-  int currentIndex = 0; // Track the current quote index
+  int currentIndex = 0;
 
   @override
   void initState() {
     super.initState();
     _loadQuotes(selectedCategory);
+    _loadFavorites();
   }
 
   @override
@@ -40,30 +39,45 @@ class _HomeState extends State<Home> {
     super.dispose();
   }
 
+  /// Load favorite quotes from SharedPreferences
+  Future<void> _loadFavorites() async {
+    List<Quote> favorites = AppLocalStorage.loadFavQuotes();
+    setState(() {
+      likedQuotes = favorites.map((q) => q.text).toSet();
+    });
+  }
+
   Future<void> _loadQuotes(String category) async {
     List<Quote> loadedQuotes = await loadQuotesFromCategory(category);
     setState(() {
       quotes = loadedQuotes;
-      currentIndex = _random.nextInt(quotes.length);
+      if (quotes.isNotEmpty) {
+        currentIndex = _random.nextInt(quotes.length);
+      }
     });
   }
 
-  void toggleLike(String quoteText) {
-    setState(() {
-      if (likedQuotes.contains(quoteText)) {
-        likedQuotes.remove(quoteText);
-      } else {
-        likedQuotes.add(quoteText);
-      }
-    });
+  /// Toggle Like (Add to Favorites)
+  void toggleLike(Quote quote) async {
+    if (!likedQuotes.contains(quote.text)) {
+      setState(() {
+        likedQuotes.add(quote.text);
+      });
+      await AppLocalStorage.addToFav(quote);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(onPressed: () {
-        push(context, Favpage());
-      }),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          await push(context, Favpage());
+          _loadFavorites(); // Refresh favorites when returning from Favpage
+        },
+        child: Icon(Icons.favorite, color: Colors.white),
+        backgroundColor: Colors.red,
+      ),
       backgroundColor: AppColors.black,
       body: SizedBox(
         height: double.infinity,
@@ -74,13 +88,12 @@ class _HomeState extends State<Home> {
           itemCount: quotes.length,
           onPageChanged: (index) {
             setState(() {
-              currentIndex = index; // Update current index when scrolling
+              currentIndex = index;
             });
           },
           itemBuilder: (context, index) {
-            final quote =
-                quotes[index]; // Show the correct quote based on index
-            bool isLiked = likedQuotes.contains(quote.text); // Check if liked
+            final quote = quotes[index];
+            bool isLiked = likedQuotes.contains(quote.text);
 
             return Container(
               decoration: BoxDecoration(color: AppColors.black),
@@ -96,10 +109,7 @@ class _HomeState extends State<Home> {
                       Spacer(flex: 2),
                       Text(
                         quote.text,
-                        style: getBodyStyle(
-                          fontSize: 30,
-                          color: Colors.white,
-                        ),
+                        style: getBodyStyle(fontSize: 30, color: Colors.white),
                         textAlign: TextAlign.center,
                       ),
                       SizedBox(height: 20),
@@ -113,9 +123,7 @@ class _HomeState extends State<Home> {
                         children: [
                           IconButton(
                             onPressed: () {
-                              toggleLike(quote.text);
-
-                              AppLocalStorage.addToFav(quote);
+                              toggleLike(quote);
                             },
                             icon: SizedBox(
                               width: 50,
