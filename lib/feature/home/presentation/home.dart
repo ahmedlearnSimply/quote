@@ -1,8 +1,12 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables
+
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:quote/core/utils/app_assets.dart';
 import 'package:quote/core/utils/appcolors.dart';
 import 'package:quote/core/utils/textstyle.dart';
 import 'package:quote/feature/home/model/quote.dart';
+import 'package:quote/main.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -69,6 +73,7 @@ class _HomeState extends State<Home> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      Spacer(flex: 2),
                       Text(
                         quote.text,
                         style: getBodyStyle(
@@ -82,6 +87,23 @@ class _HomeState extends State<Home> {
                         '- ${quote.author}',
                         style: TextStyle(fontSize: 18, color: Colors.grey),
                       ),
+                      Spacer(flex: 1),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          GestureDetector(
+                            onTap: () {},
+                            child: SizedBox(
+                              width: 50,
+                              height: 50,
+                              child: Image.asset(
+                                AppAssets.heart,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Spacer(flex: 1),
                     ],
                   ),
                 ),

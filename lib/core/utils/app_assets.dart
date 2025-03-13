@@ -5,6 +5,8 @@ class AppAssets {
   static String backgroundPng = "assets/images/bk.jpg";
   static String background2Png = "assets/images/bk2.jpg";
   static String brain = "assets/images/brain.png";
+  static String heart = "assets/images/heart.png";
+  static String share = "assets/images/share.png";
 
   // static String welcomePng = "assets/images/welcome-bg.png";
   // static String docPng = "assets/images/doc.png";
