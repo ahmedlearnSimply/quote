@@ -8,6 +8,7 @@ import 'package:quote/core/utils/appcolors.dart';
 import 'package:quote/core/utils/textstyle.dart';
 import 'package:quote/feature/home/model/quote.dart';
 import 'package:quote/main.dart';
+import 'package:share_plus/share_plus.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -104,7 +105,9 @@ class _HomeState extends State<Home> {
                           ),
                           Gap(40),
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              Share.share(quote.text);
+                            },
                             child: SizedBox(
                               width: 50,
                               height: 50,
