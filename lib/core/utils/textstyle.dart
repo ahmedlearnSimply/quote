@@ -10,7 +10,7 @@ TextStyle getTitleStyle(
     fontSize: fontSize,
     color: color ?? AppColors.primary,
     fontWeight: fontWeight,
-    fontFamily: 'cairo',
+    fontFamily: 'dancing',
   );
 }
 
@@ -23,7 +23,7 @@ TextStyle getBodyStyle(
       fontSize: fontSize,
       color: color ?? AppColors.black,
       fontWeight: fontWeight,
-      fontFamily: 'cairo',
+      fontFamily: 'dancing',
     );
 
 //* get small style
@@ -33,7 +33,7 @@ TextStyle getSmallStyle(
         FontWeight? fontWeight = FontWeight.w500}) =>
     TextStyle(
       fontSize: fontSize,
-      fontFamily: 'cairo',
+      fontFamily: 'dancing',
       color: color ?? AppColors.black,
       fontWeight: fontWeight,
     );

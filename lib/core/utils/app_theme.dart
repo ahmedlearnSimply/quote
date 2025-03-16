@@ -3,13 +3,13 @@ import 'package:quote/core/utils/appcolors.dart';
 
 class AppThemes {
   static ThemeData lightTheme = ThemeData(
-      fontFamily: 'cairo',
+      fontFamily: 'dancing',
       scaffoldBackgroundColor: AppColors.white,
       appBarTheme: const AppBarTheme(
         backgroundColor: AppColors.primary,
         foregroundColor: AppColors.white,
         titleTextStyle: TextStyle(
-          fontFamily: 'cairo',
+          fontFamily: 'dancing',
           color: AppColors.white,
           fontSize: 18,
           fontWeight: FontWeight.bold,
