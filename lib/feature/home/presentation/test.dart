@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:quote/core/widgets/custom_app_bar.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:quote/core/functions/naviagation.dart';
 import 'package:quote/core/services/storage/local_storage.dart';
@@ -64,24 +65,12 @@ class _TestState extends State<Test> {
     }
   }
 
+  DateTime _selectedDate = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: Text('Daily Inspiration',
-            style: GoogleFonts.poppins(
-                fontSize: 24,
-                fontWeight: FontWeight.w300,
-                color: Colors.white)),
-        actions: [
-          // IconButton(
-          //   icon: Icon(Icons.search, color: Colors.white),
-          //   onPressed: _showCategorySelector,
-          // ),
-        ],
-      ),
+      appBar: CustomAppBar(selectedDate: _selectedDate),
       bottomNavigationBar: _buildFancyNavigationBar(),
       backgroundColor: AppColors.black,
       body: _page == 0 ? _buildQuoteScreen() : _navPages[_page - 1],
@@ -153,17 +142,10 @@ class _TestState extends State<Test> {
                   child: Text(
                     quote.text,
                     key: ValueKey(quote.text),
-                    style: GoogleFonts.dancingScript(
+                    style: getBodyStyle(
                       fontSize: 34,
                       color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                      shadows: [
-                        Shadow(
-                          color: Colors.black,
-                          blurRadius: 10,
-                          offset: Offset(2, 2),
-                        )
-                      ],
+                      fontWeight: FontWeight.w500,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -178,9 +160,10 @@ class _TestState extends State<Test> {
                 ),
                 child: Text(
                   '- ${quote.surah} -',
-                  style: GoogleFonts.poppins(
+                  style: getBodyStyle(
                     fontSize: 20,
-                    color: Colors.white70,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
                     fontStyle: FontStyle.italic,
                   ),
                 ),
@@ -238,15 +221,12 @@ class _TestState extends State<Test> {
       items: [
         Column(mainAxisSize: MainAxisSize.min, children: [
           Icon(Icons.home, color: Colors.white),
-          // Text('Home', style: GoogleFonts.poppins(color: Colors.white)),
         ]),
         Column(mainAxisSize: MainAxisSize.min, children: [
           Icon(Icons.favorite, color: Colors.white),
-          // Text('Favorites', style: GoogleFonts.poppins(color: Colors.white)),
         ]),
         Column(mainAxisSize: MainAxisSize.min, children: [
           Icon(Icons.person, color: Colors.white),
-          // Text('Profile', style: GoogleFonts.poppins(color: Colors.white)),
         ]),
       ],
       onTap: (index) => setState(() => _page = index),
