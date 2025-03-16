@@ -68,7 +68,10 @@ class _HomeState extends State<Home> {
     Clipboard.setData(ClipboardData(text: text));
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        backgroundColor: AppColors.black,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+        backgroundColor: AppColors.white,
         content: Center(
           child: Text('تم النسخ', style: getBodyStyle()),
         ),
@@ -109,24 +112,17 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: CurvedNavigationBar(
-        key: _bottomNavigationKey,
-        backgroundColor: Colors.transparent,
-        buttonBackgroundColor: AppColors.secondary,
-        height: 60,
-        animationCurve: Curves.easeInOut,
-        animationDuration: Duration(milliseconds: 400),
-        items: <Widget>[
-          Icon(Icons.home, size: 35, color: AppColors.redColor),
-          Icon(Icons.favorite, size: 35, color: AppColors.redColor),
-          Icon(Icons.person, size: 35, color: AppColors.redColor),
-        ],
-        onTap: (index) {
-          setState(() {
-            _page = index;
-          });
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: const Color.fromARGB(255, 67, 67, 67),
+        onPressed: () {
+          push(context, Favpage());
         },
-      ),
+        child: Icon(
+          Icons.favorite,
+          size: 30,
+          color: const Color.fromARGB(255, 255, 65, 65),
+        ),
+      ), // ),
       backgroundColor: AppColors.black,
       body: _page == 0
           ? SizedBox(
@@ -139,7 +135,7 @@ class _HomeState extends State<Home> {
                 onPageChanged: (index) {
                   setState(() {
                     currentIndex = index;
-                    _loadQuotes(selectedCategory);
+                    // _loadQuotes(selectedCategory);
                   });
                 },
                 itemBuilder: (context, index) {

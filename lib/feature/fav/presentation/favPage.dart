@@ -27,6 +27,22 @@ class _FavpageState extends State<Favpage> {
     });
   }
 
+  /// Remove quote from favorites
+  void _removeFromFavorites(Quote quote) {
+    setState(() {
+      favQuotes.remove(quote);
+      // AppLocalStorage.removeFromFav(quote);
+    });
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text("تم إزالة الاقتباس من المفضلة"),
+        backgroundColor: Colors.redAccent,
+        duration: Duration(seconds: 2),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,22 +50,48 @@ class _FavpageState extends State<Favpage> {
         backgroundColor: AppColors.secondary,
         title: Text(
           "مرحبا بك ${AppLocalStorage.getCachedData(key: AppLocalStorage.name)}",
-          style: getTitleStyle(color: AppColors.primary, fontSize: 28),
+          style: getTitleStyle(color: AppColors.primary, fontSize: 24),
         ),
+        centerTitle: true,
+        elevation: 4,
       ),
       body: favQuotes.isEmpty
           ? Center(
-              child: Text("لا يوجد اقتباسات مفضلة بعد!",
-                  style: getBodyStyle(fontSize: 20, color: Colors.black)))
+              child: Text(
+                "لا يوجد اقتباسات مفضلة بعد!",
+                style: getBodyStyle(fontSize: 20, color: Colors.black),
+              ),
+            )
           : ListView.builder(
+              padding: EdgeInsets.all(16),
               itemCount: favQuotes.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(favQuotes[index].text,
-                      style: getBodyStyle(
-                        fontSize: 18,
-                        color: Colors.black,
-                      )),
+                final quote = favQuotes[index];
+
+                return Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  margin: EdgeInsets.only(bottom: 12),
+                  elevation: 3,
+                  child: ListTile(
+                    title: Text(
+                      quote.text,
+                      style: getBodyStyle(fontSize: 18, color: Colors.black),
+                      textAlign: TextAlign.right, // Arabic alignment
+                    ),
+                    subtitle: Text(
+                      "- ${quote.surah}",
+                      style: getBodyStyle(fontSize: 14, color: Colors.grey),
+                      textAlign: TextAlign.right,
+                    ),
+                    trailing: IconButton(
+                      icon: Icon(Icons.delete, color: Colors.redAccent),
+                      onPressed: () {
+                        _removeFromFavorites(quote);
+                      },
+                    ),
+                  ),
                 );
               },
             ),
