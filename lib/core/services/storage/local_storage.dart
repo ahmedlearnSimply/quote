@@ -7,7 +7,7 @@ class AppLocalStorage {
   static const String kOnboarding = "onboarding";
   static const String name = "name";
   static const String _favQuotesKey = 'fav_quotes';
-  static const String _key = 'saved_quotes';
+  static const String key = 'saved_quotes';
 
   //* shared preferences
   static late SharedPreferences _sharedPreferences;
