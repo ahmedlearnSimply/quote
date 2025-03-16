@@ -6,6 +6,7 @@ import 'package:quote/core/services/storage/local_storage.dart';
 import 'package:quote/core/utils/app_theme.dart';
 import 'package:quote/feature/fav/presentation/favPage.dart';
 import 'package:quote/feature/home/presentation/home.dart';
+import 'package:quote/feature/home/presentation/test.dart';
 import 'package:quote/feature/onboarding/pages/onborading_page.dart';
 import 'package:quote/feature/splash/splash.dart';
 
@@ -32,7 +33,7 @@ class MainApp extends StatelessWidget {
       supportedLocales: [Locale('ar')],
       locale: Locale('ar'),
       home: Scaffold(
-        body: Splash(),
+        body: Test(),
       ),
     );
   }

@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, sort_child_properties_last, prefer_const_literals_to_create_immutables
-
 import 'dart:math';
 
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -37,7 +35,6 @@ class _HomeState extends State<Home> {
     super.initState();
     _loadQuotes(selectedCategory);
     _loadFavorites();
-    // quotes = quotes[_random.nextInt(quotes.length)];
   }
 
   @override
@@ -79,23 +76,21 @@ class _HomeState extends State<Home> {
     Favpage(),
     Profile(),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: CurvedNavigationBar(
         key: _bottomNavigationKey,
-        backgroundColor: Colors.transparent, // Transparent for floating effect
-        // color: Colors.black, // Bar color
-        buttonBackgroundColor: AppColors.secondary, // Button highlight color
-        height: 60, // Adjust height for better appearance
-        animationCurve: Curves.easeInOut, // Smooth animation
-        animationDuration: Duration(milliseconds: 400), // Adjust speed
+        backgroundColor: Colors.transparent,
+        buttonBackgroundColor: AppColors.secondary,
+        height: 60,
+        animationCurve: Curves.easeInOut,
+        animationDuration: Duration(milliseconds: 400),
         items: <Widget>[
-          Icon(Icons.home, size: 35, color: AppColors.redColor), // Home Icon
-          Icon(Icons.favorite,
-              size: 35, color: AppColors.redColor), // Favorite Icon
-          Icon(Icons.person,
-              size: 35, color: AppColors.redColor), // Profile Icon
+          Icon(Icons.home, size: 35, color: AppColors.redColor),
+          Icon(Icons.favorite, size: 35, color: AppColors.redColor),
+          Icon(Icons.person, size: 35, color: AppColors.redColor),
         ],
         onTap: (index) {
           setState(() {
@@ -123,61 +118,72 @@ class _HomeState extends State<Home> {
                   bool isLiked = likedQuotes.contains(quote.text);
 
                   return Container(
-                    decoration: BoxDecoration(color: AppColors.black),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [AppColors.black, Colors.black87],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                    ),
                     alignment: Alignment.center,
-                    child: Card(
-                      color: AppColors.black,
-                      elevation: 4,
-                      child: Padding(
-                        padding: const EdgeInsets.all(30),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Spacer(flex: 2),
-                            Text(
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Spacer(flex: 2),
+                          AnimatedSwitcher(
+                            duration: Duration(milliseconds: 500),
+                            child: Text(
                               quote.text,
+                              key: ValueKey(quote.text),
                               style: getBodyStyle(
                                   fontSize: 30, color: Colors.white),
                               textAlign: TextAlign.center,
                             ),
-                            SizedBox(height: 20),
-                            Text(
-                              '- ${quote.surah}',
-                              style:
-                                  TextStyle(fontSize: 18, color: Colors.grey),
-                            ),
-                            Spacer(flex: 1),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                IconButton(
-                                  onPressed: () {
-                                    toggleLike(quote);
-                                  },
-                                  icon: SizedBox(
-                                    width: 50,
-                                    height: 50,
-                                    child: isLiked
-                                        ? Image.asset(AppAssets.heart)
-                                        : Image.asset(AppAssets.like),
+                          ),
+                          SizedBox(height: 20),
+                          Text(
+                            '- ${quote.surah}',
+                            style: TextStyle(fontSize: 18, color: Colors.grey),
+                          ),
+                          Spacer(flex: 1),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  toggleLike(quote);
+                                },
+                                icon: AnimatedSwitcher(
+                                  duration: Duration(milliseconds: 300),
+                                  child: Icon(
+                                    isLiked
+                                        ? Icons.favorite
+                                        : Icons.favorite_border,
+                                    key: ValueKey(isLiked),
+                                    color: isLiked
+                                        ? AppColors.redColor
+                                        : Colors.white,
+                                    size: 40,
                                   ),
                                 ),
-                                Gap(40),
-                                IconButton(
-                                  onPressed: () {
-                                    Share.share(quote.text);
-                                  },
-                                  icon: SizedBox(
-                                    width: 50,
-                                    height: 50,
-                                    child: Image.asset(AppAssets.upload),
-                                  ),
+                              ),
+                              Gap(40),
+                              IconButton(
+                                onPressed: () {
+                                  Share.share(quote.text);
+                                },
+                                icon: Icon(
+                                  Icons.share,
+                                  color: Colors.white,
+                                  size: 40,
                                 ),
-                              ],
-                            ),
-                            Spacer(flex: 1),
-                          ],
-                        ),
+                              ),
+                            ],
+                          ),
+                          Spacer(flex: 1),
+                        ],
                       ),
                     ),
                   );
