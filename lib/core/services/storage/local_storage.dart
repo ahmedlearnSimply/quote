@@ -7,11 +7,12 @@ class AppLocalStorage {
   static const String kOnboarding = "onboarding";
   static const String name = "name";
   static const String _favQuotesKey = 'fav_quotes';
-  static const String key = 'saved_quotes';
+  static const String _key = 'saved_quotes';
 
   //* shared preferences
   static late SharedPreferences _sharedPreferences;
 
+  //* initialize shared preferences
   static Future<void> init() async {
     _sharedPreferences = await SharedPreferences.getInstance();
   }
@@ -36,14 +37,15 @@ class AppLocalStorage {
     return _sharedPreferences.get(key);
   }
 
-  /// Save a list of quotes to SharedPreferences
+  //* Save a list of quotes to SharedPreferences
   static Future<void> saveQuotes(List<Quote> quotes, String key) async {
-    List<String> quoteStrings =
-        quotes.map((q) => jsonEncode(q.toJson())).toList();
+    List<String> quoteStrings = quotes.map((q) {
+      return jsonEncode(q.toJson());
+    }).toList();
     await _sharedPreferences.setStringList(key, quoteStrings);
   }
 
-  /// Load a list of quotes from SharedPreferences
+  //* Load a list of quotes from SharedPreferences
   static List<Quote> loadQuotes(String key) {
     List<String>? quoteStrings = _sharedPreferences.getStringList(key);
     if (quoteStrings != null) {
