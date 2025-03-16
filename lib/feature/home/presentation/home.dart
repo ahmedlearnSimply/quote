@@ -91,11 +91,11 @@ class _HomeState extends State<Home> {
         animationCurve: Curves.easeInOut, // Smooth animation
         animationDuration: Duration(milliseconds: 400), // Adjust speed
         items: <Widget>[
-          Icon(Icons.home, size: 35, color: AppColors.primary), // Home Icon
+          Icon(Icons.home, size: 35, color: AppColors.redColor), // Home Icon
           Icon(Icons.favorite,
               size: 35, color: AppColors.redColor), // Favorite Icon
           Icon(Icons.person,
-              size: 35, color: AppColors.primary), // Profile Icon
+              size: 35, color: AppColors.redColor), // Profile Icon
         ],
         onTap: (index) {
           setState(() {
@@ -184,7 +184,9 @@ class _HomeState extends State<Home> {
                 },
               ),
             )
-          : Favpage(),
+          : _page == 1
+              ? Favpage()
+              : Profile(),
     );
   }
 }
