@@ -267,7 +267,7 @@ class _TestState extends State<Test> {
     Clipboard.setData(ClipboardData(text: text));
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        backgroundColor: AppColors.primary,
+        backgroundColor: AppColors.black,
         content: Center(
             child: Text('تم النسخ',
                 style: GoogleFonts.poppins(color: Colors.white))),

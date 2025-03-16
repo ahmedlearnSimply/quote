@@ -44,6 +44,7 @@ flutter:
           weight: 600
         - asset: assets/fonts/Cairo/static/Cairo-Medium.ttf
           weight: 500
+          
     - family: dancing
       fonts:
         - asset: assets/fonts/Dancing_Script/static/DancingScript-Bold.ttf

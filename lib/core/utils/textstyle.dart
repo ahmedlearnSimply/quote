@@ -4,6 +4,7 @@ import 'package:quote/core/utils/appcolors.dart';
 //* get title
 TextStyle getTitleStyle(
     {Color? color,
+    String? fontFamily,
     FontStyle? fontStyle,
     double? fontSize = 18,
     FontWeight? fontWeight = FontWeight.bold}) {
@@ -11,7 +12,7 @@ TextStyle getTitleStyle(
     fontSize: fontSize,
     color: color ?? AppColors.primary,
     fontWeight: fontWeight,
-    fontFamily: 'cairo',
+    fontFamily: fontFamily ?? 'cairo',
     // fontStyle: fontStyle ?? FontStyle.normal,
   );
 }
@@ -19,6 +20,7 @@ TextStyle getTitleStyle(
 //* get body style
 TextStyle getBodyStyle(
         {Color? color,
+        String? fontFamily,
         FontStyle? fontStyle,
         // Shadow? shadow,
         double? fontSize = 18,
@@ -27,7 +29,8 @@ TextStyle getBodyStyle(
       fontSize: fontSize,
       color: color ?? AppColors.black,
       fontWeight: fontWeight,
-      fontFamily: 'cairo',
+      fontFamily: fontFamily ?? 'cairo',
+
       // fontStyle: fontStyle ?? FontStyle.normal,/
       // shadows: [
       //   shadow ??
@@ -42,12 +45,13 @@ TextStyle getBodyStyle(
 //* get small style
 TextStyle getSmallStyle(
         {Color? color,
+        String? fontFamily,
         FontStyle? fontStyle,
         double? fontSize = 12,
         FontWeight? fontWeight = FontWeight.w500}) =>
     TextStyle(
       fontSize: fontSize,
-      fontFamily: 'cairo',
+      fontFamily: fontFamily ?? 'cairo',
       color: color ?? AppColors.black,
       fontWeight: fontWeight,
       // fontStyle: fontStyle ?? FontStyle.normal,
