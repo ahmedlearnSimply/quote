@@ -33,6 +33,7 @@ class _HomeState extends State<Home> {
     super.initState();
     _loadQuotes(selectedCategory);
     _loadFavorites();
+    // quotes = quotes[_random.nextInt(quotes.length)];
   }
 
   @override
@@ -56,6 +57,7 @@ class _HomeState extends State<Home> {
       if (quotes.isNotEmpty) {
         currentIndex = _random.nextInt(quotes.length);
       }
+      final randomQuote = (quotes..shuffle()).first;
     });
   }
 
