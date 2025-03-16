@@ -84,11 +84,18 @@ class _HomeState extends State<Home> {
     return Scaffold(
       bottomNavigationBar: CurvedNavigationBar(
         key: _bottomNavigationKey,
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: Colors.transparent, // Transparent for floating effect
+        // color: Colors.black, // Bar color
+        buttonBackgroundColor: AppColors.secondary, // Button highlight color
+        height: 60, // Adjust height for better appearance
+        animationCurve: Curves.easeInOut, // Smooth animation
+        animationDuration: Duration(milliseconds: 400), // Adjust speed
         items: <Widget>[
-          Icon(Icons.favorite, size: 30),
-          Icon(Icons.home, size: 30),
-          Icon(Icons.person, size: 30),
+          Icon(Icons.home, size: 35, color: AppColors.primary), // Home Icon
+          Icon(Icons.favorite,
+              size: 35, color: AppColors.redColor), // Favorite Icon
+          Icon(Icons.person,
+              size: 35, color: AppColors.primary), // Profile Icon
         ],
         onTap: (index) {
           setState(() {
@@ -96,91 +103,88 @@ class _HomeState extends State<Home> {
           });
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          await push(context, Favpage());
-          _loadFavorites(); // Refresh favorites when returning from Favpage
-        },
-        child: Icon(Icons.favorite, color: Colors.white),
-        backgroundColor: Colors.red,
-      ),
       backgroundColor: AppColors.black,
-      body: SizedBox(
-        height: double.infinity,
-        width: double.infinity,
-        child: PageView.builder(
-          scrollDirection: Axis.vertical,
-          controller: _pageController,
-          itemCount: quotes.length,
-          onPageChanged: (index) {
-            setState(() {
-              currentIndex = index;
-            });
-          },
-          itemBuilder: (context, index) {
-            final quote = quotes[index];
-            bool isLiked = likedQuotes.contains(quote.text);
+      body: _page == 0
+          ? SizedBox(
+              height: double.infinity,
+              width: double.infinity,
+              child: PageView.builder(
+                scrollDirection: Axis.vertical,
+                controller: _pageController,
+                itemCount: quotes.length,
+                onPageChanged: (index) {
+                  setState(() {
+                    currentIndex = index;
+                    _loadQuotes(selectedCategory);
+                  });
+                },
+                itemBuilder: (context, index) {
+                  final quote = quotes[index];
+                  bool isLiked = likedQuotes.contains(quote.text);
 
-            return Container(
-              decoration: BoxDecoration(color: AppColors.black),
-              alignment: Alignment.center,
-              child: Card(
-                color: AppColors.black,
-                elevation: 4,
-                child: Padding(
-                  padding: const EdgeInsets.all(30),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Spacer(flex: 2),
-                      Text(
-                        quote.text,
-                        style: getBodyStyle(fontSize: 30, color: Colors.white),
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(height: 20),
-                      Text(
-                        '- ${quote.author}',
-                        style: TextStyle(fontSize: 18, color: Colors.grey),
-                      ),
-                      Spacer(flex: 1),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          IconButton(
-                            onPressed: () {
-                              toggleLike(quote);
-                            },
-                            icon: SizedBox(
-                              width: 50,
-                              height: 50,
-                              child: isLiked
-                                  ? Image.asset(AppAssets.heart)
-                                  : Image.asset(AppAssets.like),
+                  return Container(
+                    decoration: BoxDecoration(color: AppColors.black),
+                    alignment: Alignment.center,
+                    child: Card(
+                      color: AppColors.black,
+                      elevation: 4,
+                      child: Padding(
+                        padding: const EdgeInsets.all(30),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Spacer(flex: 2),
+                            Text(
+                              quote.text,
+                              style: getBodyStyle(
+                                  fontSize: 30, color: Colors.white),
+                              textAlign: TextAlign.center,
                             ),
-                          ),
-                          Gap(40),
-                          IconButton(
-                            onPressed: () {
-                              Share.share(quote.text);
-                            },
-                            icon: SizedBox(
-                              width: 50,
-                              height: 50,
-                              child: Image.asset(AppAssets.upload),
+                            SizedBox(height: 20),
+                            Text(
+                              '- ${quote.author}',
+                              style:
+                                  TextStyle(fontSize: 18, color: Colors.grey),
                             ),
-                          ),
-                        ],
+                            Spacer(flex: 1),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                IconButton(
+                                  onPressed: () {
+                                    toggleLike(quote);
+                                  },
+                                  icon: SizedBox(
+                                    width: 50,
+                                    height: 50,
+                                    child: isLiked
+                                        ? Image.asset(AppAssets.heart)
+                                        : Image.asset(AppAssets.like),
+                                  ),
+                                ),
+                                Gap(40),
+                                IconButton(
+                                  onPressed: () {
+                                    Share.share(quote.text);
+                                  },
+                                  icon: SizedBox(
+                                    width: 50,
+                                    height: 50,
+                                    child: Image.asset(AppAssets.upload),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Spacer(flex: 1),
+                          ],
+                        ),
                       ),
-                      Spacer(flex: 1),
-                    ],
-                  ),
-                ),
+                    ),
+                  );
+                },
               ),
-            );
-          },
-        ),
-      ),
+            )
+          : Favpage(),
     );
   }
 }
