@@ -2,6 +2,7 @@
 
 import 'dart:math';
 
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:quote/core/functions/naviagation.dart';
@@ -24,7 +25,9 @@ class _HomeState extends State<Home> {
   List<String> categories = ["total"];
   String selectedCategory = "total";
   List<Quote> quotes = [];
-  Random _random = Random();
+  final Random _random = Random();
+  int _page = 0;
+  GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
   final PageController _pageController = PageController();
   int currentIndex = 0;
 
@@ -74,21 +77,19 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: "Profile",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: "fav",
-          ),
+      bottomNavigationBar: CurvedNavigationBar(
+        key: _bottomNavigationKey,
+        backgroundColor: Colors.blueAccent,
+        items: <Widget>[
+          Icon(Icons.favorite, size: 30),
+          Icon(Icons.home, size: 30),
+          Icon(Icons.person, size: 30),
         ],
+        onTap: (index) {
+          setState(() {
+            _page = index;
+          });
+        },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
