@@ -70,7 +70,6 @@ class _TestState extends State<Test> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(selectedDate: _selectedDate),
       bottomNavigationBar: _buildFancyNavigationBar(),
       backgroundColor: AppColors.black,
       body: _page == 0 ? _buildQuoteScreen() : _navPages[_page - 1],
@@ -85,8 +84,8 @@ class _TestState extends State<Test> {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Color.lerp(AppColors.secondary, Colors.black, 0.2)!,
-                Color.lerp(AppColors.redColor, Colors.black, 0.7)!,
+                Color.lerp(AppColors.primary, Colors.black, 0.2)!,
+                Color.lerp(AppColors.secondary, Colors.black, 0.7)!,
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -99,18 +98,6 @@ class _TestState extends State<Test> {
           itemCount: quotes.length,
           onPageChanged: (index) => setState(() => currentIndex = index),
           itemBuilder: (context, index) => _buildQuoteCard(quotes[index]),
-        ),
-        Positioned(
-          top: 20,
-          right: 20,
-          child: Chip(
-            backgroundColor: AppColors.redColor.withOpacity(0.8),
-            label: Text(selectedCategory.toUpperCase(),
-                style: GoogleFonts.poppins(
-                    color: Colors.white,
-                    letterSpacing: 1.5,
-                    fontWeight: FontWeight.w500)),
-          ),
         ),
       ],
     );
@@ -214,7 +201,7 @@ class _TestState extends State<Test> {
       key: _bottomNavigationKey,
       backgroundColor: Colors.transparent,
       buttonBackgroundColor: AppColors.secondary,
-      color: AppColors.redColor.withOpacity(0.8),
+      color: AppColors.secondary,
       height: 60,
       animationCurve: Curves.easeInOutBack,
       animationDuration: Duration(milliseconds: 600),

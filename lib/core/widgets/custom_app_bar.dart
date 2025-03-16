@@ -42,22 +42,24 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           Text(
             _getDayName(selectedDate.weekday), // Use the selected date
             style: TextStyle(
-              color: Colors.white,
+              fontSize: 24,
+              color: Colors.black,
+              fontFamily: 'cairo',
+            ),
+          ),
+          Text(
+            '${selectedDate.day}-${selectedDate.month}-${selectedDate.year}', // Use the selected date
+            style: TextStyle(
+              fontSize: 24,
+              color: Colors.black,
               fontFamily: 'cairo',
             ),
           ),
           Gap(5),
-          Text(
-            '${selectedDate.day}-${selectedDate.month}-${selectedDate.year}', // Use the selected date
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'cairo',
-            ),
-          ),
         ],
       ),
       centerTitle: true,
-      backgroundColor: AppColors.primary,
+      backgroundColor: AppColors.secondary,
     );
   }
 }

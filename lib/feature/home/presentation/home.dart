@@ -142,10 +142,23 @@ class _HomeState extends State<Home> {
                               textAlign: TextAlign.center,
                             ),
                           ),
-                          SizedBox(height: 20),
-                          Text(
-                            '- ${quote.surah}',
-                            style: TextStyle(fontSize: 18, color: Colors.grey),
+                          SizedBox(height: 50),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 10),
+                            decoration: BoxDecoration(
+                              color: AppColors.redColor.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Text(
+                              '- ${quote.surah} -',
+                              style: getBodyStyle(
+                                fontSize: 20,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500,
+                                fontStyle: FontStyle.italic,
+                              ),
+                            ),
                           ),
                           Spacer(flex: 1),
                           Row(

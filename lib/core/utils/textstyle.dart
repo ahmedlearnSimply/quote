@@ -11,15 +11,8 @@ TextStyle getTitleStyle(
     fontSize: fontSize,
     color: color ?? AppColors.primary,
     fontWeight: fontWeight,
-    fontFamily: 'dancing',
-    fontStyle: fontStyle ?? FontStyle.normal,
-    shadows: [
-      Shadow(
-        color: Colors.black,
-        blurRadius: 10,
-        offset: Offset(2, 2),
-      )
-    ],
+    fontFamily: 'cairo',
+    // fontStyle: fontStyle ?? FontStyle.normal,
   );
 }
 
@@ -34,8 +27,8 @@ TextStyle getBodyStyle(
       fontSize: fontSize,
       color: color ?? AppColors.black,
       fontWeight: fontWeight,
-      fontFamily: 'dancing',
-      fontStyle: fontStyle ?? FontStyle.normal,
+      fontFamily: 'cairo',
+      // fontStyle: fontStyle ?? FontStyle.normal,/
       // shadows: [
       //   shadow ??
       //       Shadow(
@@ -53,16 +46,9 @@ TextStyle getSmallStyle(
         double? fontSize = 12,
         FontWeight? fontWeight = FontWeight.w500}) =>
     TextStyle(
-      shadows: [
-        Shadow(
-          color: Colors.black,
-          blurRadius: 10,
-          offset: Offset(2, 2),
-        )
-      ],
       fontSize: fontSize,
-      fontFamily: 'dancing',
+      fontFamily: 'cairo',
       color: color ?? AppColors.black,
       fontWeight: fontWeight,
-      fontStyle: fontStyle ?? FontStyle.normal,
+      // fontStyle: fontStyle ?? FontStyle.normal,
     );
