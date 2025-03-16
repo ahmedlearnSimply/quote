@@ -12,6 +12,7 @@ import 'package:quote/core/utils/appcolors.dart';
 import 'package:quote/core/utils/textstyle.dart';
 import 'package:quote/feature/fav/presentation/favPage.dart';
 import 'package:quote/feature/home/model/quote.dart';
+import 'package:quote/feature/screens/profile.dart';
 import 'package:share_plus/share_plus.dart';
 
 class Home extends StatefulWidget {
@@ -74,6 +75,10 @@ class _HomeState extends State<Home> {
     }
   }
 
+  List pages = [
+    Favpage(),
+    Profile(),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
