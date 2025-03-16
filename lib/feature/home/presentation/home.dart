@@ -23,8 +23,8 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   //* Variables
   Set<String> likedQuotes = {};
-  List<String> categories = ["total"];
-  String selectedCategory = "total";
+  List<String> categories = ["aya"];
+  String selectedCategory = "aya";
   List<Quote> quotes = [];
   final Random _random = Random();
   int _page = 0;
@@ -142,7 +142,7 @@ class _HomeState extends State<Home> {
                             ),
                             SizedBox(height: 20),
                             Text(
-                              '- ${quote.author}',
+                              '- ${quote.surah}',
                               style:
                                   TextStyle(fontSize: 18, color: Colors.grey),
                             ),
