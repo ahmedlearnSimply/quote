@@ -9,14 +9,14 @@ environment:
 dependencies:
   bloc: ^9.0.0
   curved_navigation_bar: ^1.0.6
-  flutter:
-    sdk: flutter
+
   flutter_localizations:
     sdk: flutter
   flutter_svg: ^2.0.17
   gap: ^3.0.1
   google_fonts: ^6.2.1
   localization: ^2.1.1
+  rename: ^3.0.2
   share_plus: ^10.1.4
   shared_preferences: ^2.5.2
   smooth_page_indicator: ^1.2.1
@@ -25,6 +25,13 @@ dev_dependencies:
   flutter_lints: ^4.0.0
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.14.3
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/AppIcons/appstore.png"
+
 
 flutter:
   uses-material-design: true
@@ -44,7 +51,7 @@ flutter:
           weight: 600
         - asset: assets/fonts/Cairo/static/Cairo-Medium.ttf
           weight: 500
-          
+
     - family: dancing
       fonts:
         - asset: assets/fonts/Dancing_Script/static/DancingScript-Bold.ttf
@@ -64,4 +71,4 @@ flutter:
         - asset: assets/fonts/Poppins/Poppins-SemiBold.ttf
           weight: 600
         - asset: assets/fonts/Poppins/Poppins-Medium.ttf
-          weight: 500          
+          weight: 500
