@@ -3,6 +3,7 @@ import 'package:quote/core/services/storage/local_storage.dart';
 import 'package:quote/core/utils/appcolors.dart';
 import 'package:quote/core/utils/textstyle.dart';
 import 'package:quote/feature/home/model/quote.dart';
+import 'package:share_plus/share_plus.dart';
 
 class Favpage extends StatefulWidget {
   const Favpage({super.key});
@@ -85,6 +86,21 @@ class _FavpageState extends State<Favpage> {
                   margin: EdgeInsets.only(bottom: 12),
                   elevation: 3,
                   child: ListTile(
+                    trailing: Container(
+                      decoration: BoxDecoration(
+                        color: AppColors.background,
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: IconButton(
+                        onPressed: () {
+                          Share.share(quote.text);
+                        },
+                        icon: Icon(
+                          Icons.share,
+                          color: AppColors.white,
+                        ),
+                      ),
+                    ),
                     title: Text(
                       quote.text,
                       style: getBodyStyle(fontSize: 18, color: Colors.white),
