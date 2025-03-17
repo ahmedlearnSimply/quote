@@ -1,7 +1,7 @@
 class AppAssets {
-  static String on1Svg = "assets/images/on1.svg";
-  static String on2Svg = "assets/images/on2.svg";
-  static String on3Svg = "assets/images/on3.svg";
+  static String on1Svg = "assets/images/on1.png";
+  static String on2Svg = "assets/images/on2.png";
+  static String on3Svg = "assets/images/on3.png";
   static String backgroundPng = "assets/images/bk.jpg";
   static String background2Png = "assets/images/bk2.jpg";
   static String brain = "assets/images/brain.png";

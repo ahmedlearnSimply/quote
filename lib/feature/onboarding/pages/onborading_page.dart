@@ -68,7 +68,7 @@ class _OnboradingPageState extends State<OnboradingPage> {
                       Spacer(
                         flex: 1,
                       ),
-                      SvgPicture.asset(
+                      Image.asset(
                         height: 300,
                         onboradingPages[index].image ?? '',
                       ),

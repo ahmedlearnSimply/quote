@@ -68,7 +68,7 @@ class _FavpageState extends State<Favpage> {
       body: favQuotes.isEmpty
           ? Center(
               child: Text(
-                "لا يوجد اقتباسات مفضلة بعد!",
+                "لا يوجد ايات",
                 style: getBodyStyle(fontSize: 20, color: Colors.white),
               ),
             )

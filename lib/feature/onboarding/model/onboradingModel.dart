@@ -16,19 +16,18 @@ class Onboradingmodel {
 List<Onboradingmodel> onboradingPages = [
   //* first page
   Onboradingmodel(
-    title: " ابدأ يومك بحكمة",
-    description: "احصل على اقتباس يومي يمنحك الإلهام، مباشرة على هاتفك.",
+    title: " اِقْرَأْ بِاسْمِ رَبِّكَ",
+    description: "ابدأ رحلتك مع كلمات الله",
     image: AppAssets.on1Svg,
   ),
   Onboradingmodel(
-    title: "كلمات تغيّر حياتك",
-    description:
-        "اكتشف أجمل الاقتباسات والحكم الملهمة يوميًا لتبدأ يومك بحكمة وأمل.",
+    title: "تَدَبُّرٌ وَفَهْمٌ",
+    description: "تأمل وتفهم المعاني العميقة.",
     image: AppAssets.on2Svg,
   ),
   Onboradingmodel(
-    title: "جاهز لاكتشاف الكلمات الملهمة؟",
-    description: "ابدأ رحلتك في عالم الحكم والاقتباسات واستمتع بجمال الكلمات.",
+    title: "حِفْظٌ وَعَمَلٌ",
+    description: "اجعل القرآن منهج حياتك",
     image: AppAssets.on3Svg,
   ),
 ];
