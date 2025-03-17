@@ -113,7 +113,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color.fromARGB(255, 67, 67, 67),
+        backgroundColor: AppColors.cardColor,
         onPressed: () {
           push(context, Favpage());
         },
@@ -123,7 +123,7 @@ class _HomeState extends State<Home> {
           color: const Color.fromARGB(255, 255, 65, 65),
         ),
       ), // ),
-      backgroundColor: AppColors.black,
+      backgroundColor: AppColors.background,
       body: _page == 0
           ? SizedBox(
               height: double.infinity,
@@ -144,12 +144,12 @@ class _HomeState extends State<Home> {
 
                   return Container(
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [AppColors.black, Colors.black87],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                    ),
+                        // gradient: LinearGradient(
+                        //   colors: [AppColors.black, Colors.black87],
+                        //   begin: Alignment.topLeft,
+                        //   end: Alignment.bottomRight,
+                        // ),
+                        ),
                     alignment: Alignment.center,
                     child: Padding(
                       padding: const EdgeInsets.all(20),

@@ -46,11 +46,20 @@ class _FavpageState extends State<Favpage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.background,
       appBar: AppBar(
-        backgroundColor: AppColors.secondary,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back_ios_new_rounded,
+          ),
+        ),
+        backgroundColor: const Color.fromARGB(255, 58, 65, 78),
         title: Text(
           "مرحبا بك ${AppLocalStorage.getCachedData(key: AppLocalStorage.name)}",
-          style: getTitleStyle(color: AppColors.primary, fontSize: 24),
+          style: getTitleStyle(color: AppColors.white, fontSize: 24),
         ),
         centerTitle: true,
         elevation: 4,
@@ -59,7 +68,7 @@ class _FavpageState extends State<Favpage> {
           ? Center(
               child: Text(
                 "لا يوجد اقتباسات مفضلة بعد!",
-                style: getBodyStyle(fontSize: 20, color: Colors.black),
+                style: getBodyStyle(fontSize: 20, color: Colors.white),
               ),
             )
           : ListView.builder(
@@ -69,6 +78,7 @@ class _FavpageState extends State<Favpage> {
                 final quote = favQuotes[index];
 
                 return Card(
+                  color: AppColors.cardColor,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
@@ -77,19 +87,13 @@ class _FavpageState extends State<Favpage> {
                   child: ListTile(
                     title: Text(
                       quote.text,
-                      style: getBodyStyle(fontSize: 18, color: Colors.black),
+                      style: getBodyStyle(fontSize: 18, color: Colors.white),
                       textAlign: TextAlign.right, // Arabic alignment
                     ),
                     subtitle: Text(
                       "- ${quote.surah}",
                       style: getBodyStyle(fontSize: 14, color: Colors.grey),
                       textAlign: TextAlign.right,
-                    ),
-                    trailing: IconButton(
-                      icon: Icon(Icons.delete, color: Colors.redAccent),
-                      onPressed: () {
-                        _removeFromFavorites(quote);
-                      },
                     ),
                   ),
                 );

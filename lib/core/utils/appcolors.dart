@@ -9,4 +9,6 @@ class AppColors {
   static const Color white = Color(0xFFFFFFFF);
   static const Color redColor = Color(0xFFE85050);
   static const Color black = Color.fromARGB(255, 19, 18, 18);
+  static const Color background = Color(0xFF242D3C);
+  static const Color cardColor = Color(0xFF334050);
 }
