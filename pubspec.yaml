@@ -31,6 +31,8 @@ flutter_icons:
   android: true
   ios: true
   image_path: "assets/images/AppIcons/appstore.png"
+  adaptive_icon_foreground: "assets/images/logow.png"
+
 
 
 flutter:
